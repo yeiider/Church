@@ -111,7 +111,7 @@ function init_autocomplete() {
 
 var countries = {
 @foreach($data['miembros'] as $i)
-{{$i->id}}:"{{$i->nombres .' '.$i->apellidos}}",
+{{$i->id}}:"{{$i->nombres .'  '.$i->apellidos}}",
 @endforeach
 }
 

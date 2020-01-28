@@ -78,6 +78,7 @@
     <script src="{{asset('assets/vendors/jszip/dist/jszip.min.js')}}"></script>
     <script src="{{asset('assets/vendors/pdfmake/build/pdfmake.min.js')}}"></script>
     <script src="{{asset('assets/vendors/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('assets/js-custon/jquery-confirm.min.js')}}"></script>
 
 <!--EndTables-->
 <!-- jQuery Smart Wizard -->

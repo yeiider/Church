@@ -118,7 +118,7 @@ const FormIglesia=({distritos, token})=>(
                         <div className="form-group row">
                             <label for="middle-name" className="col-form-label col-md-3 col-sm-3 label-align">Fecha de Creacion</label>
                             <div className="col-md-6 col-sm-6 ">
-                            <input type="date" className="form-control has-feedback-left" id="single_cal3"  name="fecha" />
+                            <input type="date" className="form-control has-feedback-left"   name="fecha" />
 
                             </div>
                           </div>

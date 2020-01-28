@@ -27,6 +27,7 @@
           <ul class="nav side-menu">
             <li><a href={{url('/')}}><i class="fa fa-dashboard"></i> Dashboard </a>
             </li>
+            @if(auth()->user()->rol==1)
             <li><a><i class="fa fa-home"></i> Iglesias <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href={{route('distritos')}}>Lista de Distritos</a></li>
@@ -38,17 +39,15 @@
 
               </ul>
             </li>
+            @else
+            <li><a href={{route('iglesias')}}><i class="fa fa-home"></i> Iglesias </a>
+            </li>
+            @endif
             <li><a><i class="fa fa-user"></i>Pastores<span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
                 <li><a href="general_elements.html">Lista de Pastores</a></li>
                 <li><a href={{route('add-pastor')}}>Add Pastor</a></li>
-                <li><a href="typography.html">Typography</a></li>
-                <li><a href="icons.html">Icons</a></li>
-                <li><a href="glyphicons.html">Glyphicons</a></li>
-                <li><a href="widgets.html">Widgets</a></li>
-                <li><a href="invoice.html">Invoice</a></li>
-                <li><a href="inbox.html">Inbox</a></li>
-                <li><a href="calendar.html">Calendar</a></li>
+
               </ul>
             </li>
             <li><a><i class="fa fa-users"></i> Miembros <span class="fa fa-chevron-down"></span></a>
@@ -57,13 +56,13 @@
                 <li><a href={{route('add-miembro')}}>Add Miembro</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-gears"></i> Diezmos <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-cubes"></i> Ingresos <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="chartjs2.html">Chart JS2</a></li>
+                  <li><a href="morisjs.html">Ingresos</a></li>
                   <li><a href="{{route('diezmo-add')}}">Ingresar Diezmos</a></li>
-                  <li><a href="morisjs.html">Moris JS</a></li>
-                  <li><a href="echarts.html">ECharts</a></li>
-                  <li><a href="other_charts.html">Other Charts</a></li>
+                  <li><a href="{{route('ofrenda')}}">Ingresar Ofrenda</a></li>
+                  <li><a href="echarts.html">Donaciones</a></li>
+                  <li><a href="other_charts.html">Otros Ingresos</a></li>
                 </ul>
               </li>
 

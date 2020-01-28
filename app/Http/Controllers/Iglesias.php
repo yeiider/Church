@@ -36,7 +36,7 @@ class Iglesias extends Controller
         $verifica=User::where('email','=',$request->email)->first();
         if($verifica==null)
          return redirect()->back()->with('duplicado','El correo ya se encuentra registrado intente con otro!');
-        if(!empty(auth()->user())){
+        if(!empty(auth()->user()) && auth()->user()->rol==1){
            // $pass= crypt(Str::random(10));
 
 
@@ -94,10 +94,10 @@ class Iglesias extends Controller
     }
 
     public function createIglesiaView(){
-        if(!empty(auth()->user())){
+        if(!empty(auth()->user()) && auth()->user()->rol==1){
             return view('admin/iglesia_add');
         }else{
-            redirect('/');
+            return view('errors/404');
         }
 
     }
@@ -154,7 +154,7 @@ class Iglesias extends Controller
       $iglesia->nombre=ucwords($request->nombre);
       $iglesia->telefono=$request->telefono;
       $iglesia->direccion=ucwords($request->direccion);
-      $iglesia->fecha_creacion=$request->fecha;
+      $iglesia->fecha_creacion=date('d-m-Y',strtotime($request->fecha));
 
       $user->nombre=ucwords($request->user);
       $user->apellido=ucwords($request->apellido);

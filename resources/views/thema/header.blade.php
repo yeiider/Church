@@ -44,6 +44,7 @@
     <!-- Switchery -->
     <link href="{{asset('assets/vendors/starrr/dist/starrr.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{asset('assets/js-custon/jquery-confirm.min.css')}}">
 
 
 

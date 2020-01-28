@@ -16,14 +16,14 @@ class Pastores extends Controller
 
     public function crearPastor(Request $request){
 
-      if(!empty(auth()->user())){
+        if(!empty(auth()->user()) && auth()->user()->rol==1){
           if( Pastor::create([
                'nombre' => ucwords($request->nombre),
                'apellido' => ucwords($request->apellido),
                'identificacion' => $request->cc,
                'genero' => $request->genero,
                'edad' => $request->edad,
-               'fecha_nacimiento'=>$request->fecha,
+               'fecha_nacimiento'=>date('d-m-Y',strtotime($request->fecha)),
                 'etnia' => $request->etnia,
                 'casado' => $request->casado,
                 'num_hijos' => $request->hijos,
@@ -49,7 +49,7 @@ class Pastores extends Controller
                 return redirect()->route('pastores');
            }
       }else{
-          redirect('/');
+          return view('errors/404');
       }
     }
 

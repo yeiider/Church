@@ -55493,7 +55493,6 @@ var FormIglesia = function FormIglesia(_ref) {
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "date",
     className: "form-control has-feedback-left",
-    id: "single_cal3",
     name: "fecha"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row"
@@ -55719,7 +55718,7 @@ function (_Component) {
         className: "x_panel"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "x_title"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Form Wizards ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "Sessions")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", null, "Inscribir ", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("small", null, "Usuarios")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
         className: "nav navbar-right panel_toolbox"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("a", {
         className: "collapse-link"
@@ -55750,7 +55749,7 @@ function (_Component) {
         className: "clearfix"
       })), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "x_content"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", null, "This is a basic form wizard example that inherits the colors from the selected scheme."), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "wizard",
         className: "form_wizard wizard_horizontal"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("ul", {
@@ -55909,33 +55908,7 @@ function (_Component) {
         value: "2"
       }, "Casado"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
         value: "3"
-      }, "Union Libre")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "form-group row"
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("label", {
-        className: "col-form-label col-md-3 col-sm-3 label-align",
-        "for": "etnia"
-      }, "Etnia", react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("span", {
-        className: "required"
-      }, "*")), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-        className: "col-md-6 col-sm-6 "
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("select", {
-        id: "etnia",
-        name: "etnia",
-        required: "required",
-        className: "form-control "
-      }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", null, "Seleccione"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Blanco"
-      }, "Blanco"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Indio"
-      }, "Indigena"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Mestizo"
-      }, "Mestizo"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Mulato"
-      }, "Mulato"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Negro"
-      }, "Afrom"), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("option", {
-        value: "Zambos"
-      }, "Zambos"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+      }, "Union Libre"))))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         id: "step-2"
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h2", {
         className: "StepTitle"
@@ -56066,7 +56039,7 @@ function (_Component) {
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("input", {
         type: "date",
         className: "form-control has-feedback-left",
-        id: "single_cal1",
+        id: "fecha_inicio",
         name: "fecha_inicio"
       }))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
         className: "form-group row"

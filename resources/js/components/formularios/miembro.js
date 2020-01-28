@@ -48,7 +48,7 @@ export default class FormMiembro extends Component{
   <div className="col-md-12 col-sm-12 ">
   <div className="x_panel">
     <div className="x_title">
-      <h2>Form Wizards <small>Sessions</small></h2>
+      <h2>Inscribir <small>Usuarios</small></h2>
       <ul className="nav navbar-right panel_toolbox">
         <li><a className="collapse-link"><i className="fa fa-chevron-up"></i></a>
         </li>
@@ -70,7 +70,7 @@ export default class FormMiembro extends Component{
 
 
 
-      <p>This is a basic form wizard example that inherits the colors from the selected scheme.</p>
+
       <div id="wizard" className="form_wizard wizard_horizontal">
         <ul className="wizard_steps">
           <li>
@@ -181,22 +181,7 @@ export default class FormMiembro extends Component{
 
               </div>
             </div>
-            <div className="form-group row">
-              <label className="col-form-label col-md-3 col-sm-3 label-align" for="etnia">Etnia<span className="required">*</span>
-              </label>
-              <div className="col-md-6 col-sm-6 ">
-                <select id="etnia" name="etnia" required="required" className="form-control " >
-                    <option>Seleccione</option>
-                    <option value="Blanco">Blanco</option>
-                    <option value="Indio">Indigena</option>
-                    <option value="Mestizo">Mestizo</option>
-                    <option value="Mulato">Mulato</option>
-                    <option value="Negro">Afrom</option>
-                    <option value="Zambos">Zambos</option>
-                </select>
 
-              </div>
-            </div>
         </div>
         <div id="step-2">
           <h2 className="StepTitle">Step 2 Content</h2>
@@ -293,7 +278,7 @@ export default class FormMiembro extends Component{
         <div className="form-group row">
               <label for="single_cal1" className="col-form-label col-md-3 col-sm-3 label-align">Fecha de Inicio</label>
               <div className="col-md-6 col-sm-6 ">
-              <input type="date" className="form-control has-feedback-left" id="single_cal1"  name="fecha_inicio" />
+              <input type="date" className="form-control has-feedback-left" id="fecha_inicio"  name="fecha_inicio" />
 
               </div>
             </div>

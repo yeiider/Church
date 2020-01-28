@@ -4,16 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Iglesia;
+use App\Models\Diezmo;
 
 class Miembro extends Model
 {
     protected $table="miembros";
     protected $fillable=['iglesias_id','nombres','apellidos','identificacion','genero','edad','fecha_nacimiento',
                          'estado_civil','num_hijos','diezma','estado','fecha_inicio','empleado','estrato','etnia',
-                         'discapasida','pais','departamento','municipio'];
+                         'discapasida','pais','departamento','municipio','direccion','telefono'];
 
     public function iglesia(){
-        return $this->belongsTo(Iglesia::class);
+        return $this->belongsTo(Iglesia::class,'iglesias_id','id');
     }
 
     public function scopeDamas($query){
@@ -71,4 +72,11 @@ class Miembro extends Model
     public function scopeConzolidadando($query){
         return $query->where('estado','=',1);
     }
+
+    public function diezmos(){
+     return $this->hasMany(Diezmo::class,'miembros_id','id');
+    }
+
+
+
 }

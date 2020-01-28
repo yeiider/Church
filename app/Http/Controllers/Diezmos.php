@@ -17,7 +17,9 @@ class Diezmos extends Controller
 if(empty(auth()->user()))
 return view('../errors/404');
         $i=Iglesia::where('email','=',auth()->user()->email)->first();
-        $miembros=Miembro::where('iglesias_id','=',$i->id)->get();
+        $miembros=Miembro::where('iglesias_id','=',$i->id)
+        ->where('diezma','=',true)
+        ->get();
         $dia=date('d-m-y');
         $diezmos=Diezmo::where('iglesias_id','=',$i->id)
         ->where('fecha','=',$dia)
@@ -33,15 +35,20 @@ return view('../errors/404');
     }
 
     public function buscarDiezmante(Request $request){
-       if($request->ajax()){
+        if ($request->ajax()) {
+            $id=Iglesia::where('email', '=', auth()->user()->email)->first();
+            $data=explode('  ', $request->data);
+            $m=Miembro::where('iglesias_id', '=', $id->id)
+           ->where('nombres', '=', $data[0])
+           ->where('apellidos', '=',$data[1])
+           ->where('diezma','=',true)
+           ->first();
 
-           $id=Iglesia::where('email','=',auth()->user()->email)->first();
-           $miembro=Miembro::where('iglesias_id','=',$id->id)->get();
 
-         foreach($miembro as $m){
-             if ($m->nombres.' '.$m->apellidos == $request->data) {
 
-             return response()->json("<div class='dropdown-divider'></div>
+
+
+            return response()->json("<div class='dropdown-divider'></div>
              <h5>Documento: $m->identificacion</h5>
              <div class='dropdown-divider'></div>
              <h5>Direccion: $m->direccion</h5>
@@ -67,12 +74,7 @@ return view('../errors/404');
          </div>
 
              ");
-             } else {
-                 return "No se encontraron resultados";
-             }
-         }
-
-       }
+        }
     }
 
     public function registrar(Request $request){
@@ -80,7 +82,7 @@ return view('../errors/404');
            return redirect()->back();
         $id_ig=Iglesia::where('email' , '=' , auth()->user()->email)->first();
 
-        $dia=date('d-m-y');
+        $dia=date('d-m-Y');
         $v=Diezmo::where('id','=',$request->id)
         ->where('fecha','=',$dia)->first();
         if($v!==null)

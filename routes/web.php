@@ -11,6 +11,8 @@
 |
 */
 
+
+
 Route::get('/','Auth\LoginController@form')->name('login');
 Route::get('/home','Home@index')->name('home');
 Route::get('Logaut','Auth\LoginController@logaut')->name('logaut');
@@ -40,4 +42,8 @@ Route::get('/Miembros','Miembros@index')->name('miembros');
 Route::get('/Diezmo/Add','Diezmos@ingresar')->name('diezmo-add');
 Route::post('/Diezmo/diezmante','Diezmos@buscarDiezmante')->name('buscar_diezmante');
 Route::post('/Diezmo/registra','Diezmos@registrar')->name('diezmo-registrar');
-
+Route::get('/Miembros/info/{id}','Miembros@perfil')->name('perfil-miembro');
+Route::post('/Miembros/info/set','Miembros@update')->name('update-miembro');
+Route::get('/Miembros/drop/{id}','Miembros@drop')->name('elimina-miembro');
+Route::get('/Ofrenda/add/','Ingresos@ofrenda')->name('ofrenda');
+Route::post('/Ofrenda/add','Ingresos@setOfrenda')->name('ofrenda-add');

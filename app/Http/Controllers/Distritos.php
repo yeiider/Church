@@ -15,7 +15,11 @@ class Distritos extends Controller
    }
 
    public function distritoView(){
-    return view('admin/distrito_crear');
+    if (!empty(auth()->user()) && auth()->user()->rol==1) {
+        return view('admin/distrito_crear');
+    }else{
+        return view('errors/404');
+    }
    }
 
    public function distritoCrear(Request $request){

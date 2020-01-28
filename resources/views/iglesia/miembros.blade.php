@@ -12,8 +12,11 @@
 
       <div class="clearfix">
 <!-- Main -->
-
-
+@if(session('success'))
+<div class="alert alert-success alert-dismissible col-ms-6 col-sm-6" role="alert"><p style="font-size:17px; margin-top:3%"><strong>{{session('success')}}!</strong></p>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+  </button></div>
+    @endif
 <table id="datatable-buttons" class="table table-striped table-bordered dt-responsive nowrap" style="width:100%" >
     <thead>
       <tr>
@@ -56,11 +59,32 @@
                 Opcion
               </button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href={{url("Iglesia/{$i->referencia}")}}>Ver Perfil</a>
+                <a class="dropdown-item" href={{url("Miembros/info/{$i->id}")}}>Ver Perfil</a>
                 <a class="dropdown-item" href="#">Informe Miembros</a>
                 <div class="dropdown-divider"></div>
 
-                <a class="dropdown-item" href="#">Eliminar</a>
+              <a class="dropdown-item" href="#" onclick="$.confirm({
+                title: '<h3>Seguro?!</h3>',
+                content: '<h5>Si eliminas a este miembro se eliminara toda la informacion relacionada con el mismo</h5>',
+                buttons: {
+                   confirma:{
+                       text:'Eliminar',
+                       btnClass:'btn-danger',
+                       action:function(){
+
+                          location.href='{{url("Miembros/drop/{$i->id}")}}'
+                       }
+                   },
+                    cancelar: {
+                        text: 'Cancelar',
+                        btnClass: 'btn-default',
+                        keys: ['enter', 'shift'],
+                        action: function(){
+                            $.alert('Proceso cancelado');
+                        }
+                    }
+                }
+            });">Eliminar</a>
 
               </div></td>
           </tr>
