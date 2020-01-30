@@ -7,6 +7,9 @@ use App\Models\Distrito;
 use App\Models\Pastor;
 use App\Models\Config;
 use App\Models\Miembro;
+use App\Models\Ingreso;
+use App\Models\Diezmo;
+use App\Models\Ofrenda;
 class Iglesia extends Model
 {
     protected $table="iglesias";
@@ -29,6 +32,18 @@ public function miembros(){
 
 public function confi(){
   return $this->belongsTo(Config::class);
+}
+
+public function ingresos(){
+return $this->hasMany(Ingreso::class,'iglesias_id','id');
+}
+
+public function diezmos(){
+    return $this->hasMany(Diezmo::class,'iglesias_id','id');
+}
+
+public function ofrendas(){
+    return $this->hasMany(Ofrenda::class,'iglesias_id','id');
 }
 
 }

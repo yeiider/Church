@@ -123,6 +123,9 @@
   @include('../thema.footer')
   <script>
 $('#mytable').dataTable();
+$('#ofrenda').on('input',function (){
+        this.value = (this.value + '').replace(/[^0-9]/g, '');
+      });
   </script>
 </body>
 </html>

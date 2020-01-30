@@ -58,17 +58,19 @@
             </li>
             <li><a><i class="fa fa-cubes"></i> Ingresos <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="morisjs.html">Ingresos</a></li>
+                <li><a href="{{route('ingresos')}}">Ingresos</a></li>
                   <li><a href="{{route('diezmo-add')}}">Ingresar Diezmos</a></li>
                   <li><a href="{{route('ofrenda')}}">Ingresar Ofrenda</a></li>
-                  <li><a href="echarts.html">Donaciones</a></li>
-                  <li><a href="other_charts.html">Otros Ingresos</a></li>
+                  <li><a href="{{route('donaciones')}}">Otros Ingresos</a></li>
+                  <li><a href="{{url('Ingresos/add')}}">Add Ingreso</a></li>
+
+
                 </ul>
               </li>
 
             <li><a><i class="fa fa-bar-chart-o"></i> Informes <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="chartjs.html">Chart JS</a></li>
+                <li><a href="{{route('caja')}}">Informe diario de Caja</a></li>
                 <li><a href="chartjs2.html">Chart JS2</a></li>
                 <li><a href="morisjs.html">Moris JS</a></li>
                 <li><a href="echarts.html">ECharts</a></li>

@@ -8,6 +8,10 @@ use App\Models\Miembro;
 use App\Models\Iglesia;
 use App\Models\Pastor;
 use App\Models\Distrito;
+use App\Models\Ofrenda;
+use App\Models\Diezmo;
+use App\Models\Ingreso;
+use Illuminate\Http\Request;
 
 
 class Dashboar extends Controller
@@ -150,6 +154,123 @@ class Dashboar extends Controller
         return response()->json();
     }
 
+    public function infoIngresos(Request $request){
+        $hoy=date('d-m-Y');
+        if($request->ajax()){
+         $fecha=explode(' - ',$request->data);
+         $inicio=trim(date('Y-m-d',strtotime($fecha[0])));
+         $fin=trim(date('Y-m-d',strtotime($fecha[1])));
+         if($inicio==date('Y-m-d')){
+             $inicio=date('Y-m-d',strtotime($inicio.'- 1 days'));
+         }
+         if($inicio==$fin){
+             $inicio=date('Y-m-d',strtotime($inicio.'- 1 days'));
+         }
+
+         if(auth()->user()->rol==1){
+            $iglesia=Iglesia::all();
+            $diezmos=Diezmo::whereBetween('created_at',[$inicio,$fin])
+            ->get();
+            $ofrendas=Ofrenda::whereBetween('created_at',[$inicio,$fin])
+            ->get();
+            $otros=Ingreso::whereBetween('created_at',[$inicio,$fin])
+            ->get();
+         }else{
+             $iglesia=Iglesia::where('email', '=', auth()->user()->email)->first();
+             $diezmos=Diezmo::where('iglesias_id', '=', $iglesia->id)
+             ->whereBetween('created_at', [$inicio,$fin])
+             ->get();
+             $ofrendas=Ofrenda::where('iglesias_id', '=', $iglesia->id)
+            ->whereBetween('created_at', [$inicio,$fin])
+            ->get();
+             $otros=Ingreso::where('iglesias_id', '=', $iglesia->id)
+            ->whereBetween('created_at', [$inicio,$fin])
+            ->get();
+         }
+
+         $totalDiezmos=0;
+         $totalOfrendas=0;
+         $totalIngresos=0;
+
+         foreach($diezmos as $d)
+         $totalDiezmos+=$d->valor;
+
+         foreach($ofrendas as $o)
+         $totalOfrendas+=$o->ofrenda;
+
+         foreach($otros as $t)
+         $totalIngresos+=$t->valor;
+
+         // return $totalDiezmos.' '. $totalOfrendas .' '.$totalIngresos;
+         $data=[
+             'tdiezmos' => number_format($totalDiezmos,0,',','.'),
+             'tofrendas' => number_format($totalOfrendas,0,',','.'),
+             'tingresos' => number_format($totalIngresos,0,',','.'),
+
+             'diezmos' => $diezmos->count(),
+             'ofrendas' => $ofrendas->count(),
+             'ingresos' => $otros->count(),
+             'total' => number_format($totalDiezmos + $totalIngresos +$totalOfrendas,0,',','.'),
+             't'=> $diezmos->count() + $ofrendas->count() + $otros->count()
+
+             ];
+
+         return response()->json($data);
+        }
+
+    }
+
+    public function chartIngresos(){
+
+        $mesall=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Obtubre','Noviembre','Diciembre'];
+        $mes1=['Enero','Febrero','Marzo','Abril','Mayo','Junio'];
+        $mes2=['Julio','Agosto','Septiembre','Obtubre','Noviembre','Diciembre'];
+        $md=[];
+        $mo=[];
+        $mi=[];
+        $vo=[0,0,0,0,0,0,0,0,0,0,0,0];
+        $vd=[0,0,0,0,0,0,0,0,0,0,0,0];
+        $vi=[0,0,0,0,0,0,0,0,0,0,0,0];
+
+
+
+        if(auth()->user()->roll==1){
+
+        }else{
+          $iglesia=Iglesia::where('email','=',auth()->user()->email)->first();
+          for($i=0;$i<=12-1;$i++){
+           $ss=$mesall[$i];
+           $k=Diezmo::where('iglesias_id','=',$iglesia->id)->$ss()->get();
+           $q=Ofrenda::where('iglesias_id','=',$iglesia->id)->$ss()->get();
+           $v=Ingreso::where('iglesias_id','=',$iglesia->id)->$ss()->get();
+            $s=0;
+           foreach($k as $md){$vd[$s]+=$md->valor;}foreach($q as $md){$vo[$s]+=$md->ofrenda;}foreach($v as $md){$vi[$s]+=$md->valor;}
+           $s++;
+          }
+
+        }
+        $mesesent=[];$valord=[];$valoro=[];$valori=[];
+     for($i=0;$i<=date('m');$i++){
+        $mesesent[$i]=$mesall[$i];
+        $valord[$i]=$vd[$i];
+        $valoro[$i]=$vo[$i];
+        $valori[$i]=$vi[$i];
+     }
+
+     $labels=[];
+        $data=[
+        'labels'=> $mesesent,
+        'datasets' => array(['label' => 'Diezmos','backgroundColor'=>'#26B99A','data' => $valord],
+                            ['label' => 'Ofrendas','backgroundColor' => '#03586A','data' => $valoro],
+                            ['label' => 'Otros','backgroundColor' => '#17B6B4','data' => $valori]
+                            )
+        ];
+
+        return response()->json($data);
+
+
+
+    }
 
 }
 //Ciudad::all('id','nombre','distrito')->take(10)
