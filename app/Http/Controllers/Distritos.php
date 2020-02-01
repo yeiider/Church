@@ -27,7 +27,7 @@ class Distritos extends Controller
         'nombre' => $request->nombre,
         'coordinador_id' => $request->coordinador
     ])){
-        echo "Datos insertados";
+        return redirect()->back()->with('success','Se registro el distrito correctamente');
     }else{
         echo "datos no insertados :-(";
     }

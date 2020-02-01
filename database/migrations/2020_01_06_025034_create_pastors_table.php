@@ -20,7 +20,7 @@ class CreatePastorsTable extends Migration
             $table->string('identificacion',12);
             $table->string('genero',7);
             $table->string('edad',2)->nullable();
-            $table->string('fecha_nacimiento',20)->nullable();
+            $table->date('fecha_nacimiento',20)->nullable();
             $table->string('etnia',10)->nullable();
             $table->boolean('casado')->nullable();
             $table->string('num_hijos',2)->nullable();

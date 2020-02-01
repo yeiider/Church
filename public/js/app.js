@@ -56270,14 +56270,12 @@ var FormPastor = function FormPastor(_ref) {
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row"
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", {
-    "for": "single_cal3",
-    className: "col-form-label col-md-3 col-sm-3 label-align"
+    className: "col-form-label col-md-3 col-sm-3 "
   }, "Fecha de Nacimiento"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "col-md-6 col-sm-6 "
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
     type: "date",
     className: "form-control has-feedback-left",
-    id: "single_cal3",
     name: "fecha"
   }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     className: "form-group row"

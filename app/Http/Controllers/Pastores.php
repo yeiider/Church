@@ -17,13 +17,17 @@ class Pastores extends Controller
     public function crearPastor(Request $request){
 
         if(!empty(auth()->user()) && auth()->user()->rol==1){
+            $valida=User::where('email','=',$request->email)->first();
+            if($valida!=null){
+                return redirect()->back()->with('error','Ya se encuentra registrado este correo');
+            }
           if( Pastor::create([
                'nombre' => ucwords($request->nombre),
                'apellido' => ucwords($request->apellido),
                'identificacion' => $request->cc,
                'genero' => $request->genero,
                'edad' => $request->edad,
-               'fecha_nacimiento'=>date('d-m-Y',strtotime($request->fecha)),
+               'fecha_nacimiento'=>$request->fecha,
                 'etnia' => $request->etnia,
                 'casado' => $request->casado,
                 'num_hijos' => $request->hijos,

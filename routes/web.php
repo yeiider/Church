@@ -47,16 +47,20 @@ Route::post('/Miembros/info/set','Miembros@update')->name('update-miembro');
 Route::get('/Miembros/drop/{id}','Miembros@drop')->name('elimina-miembro');
 Route::get('/Ofrenda/add/','Ingresos@ofrenda')->name('ofrenda');
 Route::post('/Ofrenda/add','Ingresos@setOfrenda')->name('ofrenda-add');
-Route::get('/Ingresos/list','Ingresos@donaciones')->name('donaciones');
-Route::get('/Ingresos/add',function(){
+Route::get('/Donaciones/list','Ingresos@donaciones')->name('donaciones');
+Route::get('/Donaciones/add',function(){
     if(empty(auth()->user())){
         return view('errors/404');
     }
     return view('iglesia/donaciones_add');
 });
-Route::post('/Ingresos/set','Ingresos@createDonacion')->name('donacion-create');
-Route::post('/Ingresos/Update','Ingresos@updateDonacion')->name('donacion-update');
+Route::post('/Donaciones/set','Ingresos@createDonacion')->name('donacion-create');
+Route::post('/Donaciones/Update','Ingresos@updateDonacion')->name('donacion-update');
 Route::get('/Ingresos','Ingresos@index')->name('ingresos');
 Route::get('/Ingreso/info','react\Dashboar@infoIngresos')->name('info-ingresos');
 Route::get('/Ingreso/Chart','react\Dashboar@chartIngresos')->name('chart-ingresos');
 Route::get('/Informe/Caja','Cajas@index')->name('caja');
+Route::get('/Caja/data-fecha','Cajas@sendMonth')->name('data-caja');
+Route::get('/Ingresos/Otros','Ingresos@otrosIngresos')->name('otros-ingresos');
+Route::get('Diezmo/drop/{id}','Ingresos@dropDiezmo')->name('drop-diezmo');
+Route::get('/Donaciones/estado/{id}','Ingresos@donacionesEstado')->name('donaciones-estado');

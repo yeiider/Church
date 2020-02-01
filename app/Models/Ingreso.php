@@ -8,7 +8,7 @@ class Ingreso extends Model
 {
     protected $table="ingresos";
     protected $fillable=['iglesias_id','nombre','apellido','identificacion','razon_social','nit',
-    'email','ciudad','direccion','telefono','fecha','motivo','valor'
+    'email','ciudad','direccion','telefono','motivo','valor','estado'
 ];
 
 

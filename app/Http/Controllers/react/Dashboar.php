@@ -160,30 +160,39 @@ class Dashboar extends Controller
          $fecha=explode(' - ',$request->data);
          $inicio=trim(date('Y-m-d',strtotime($fecha[0])));
          $fin=trim(date('Y-m-d',strtotime($fecha[1])));
-         if($inicio==date('Y-m-d')){
-             $inicio=date('Y-m-d',strtotime($inicio.'- 1 days'));
+
+         $fin=date('Y-m-d',strtotime($fin.'+ 1 days'));
+        /* if($inicio==date('Y-m-d')){
+             $fin=date('Y-m-d',strtotime($fin.'+ 1 days'));
          }
          if($inicio==$fin){
-             $inicio=date('Y-m-d',strtotime($inicio.'- 1 days'));
-         }
+             $fin=date('Y-m-d',strtotime($fin.'+ 1 days'));
+         }*/
+
 
          if(auth()->user()->rol==1){
             $iglesia=Iglesia::all();
             $diezmos=Diezmo::whereBetween('created_at',[$inicio,$fin])
+            ->where('estado','=',true)
             ->get();
             $ofrendas=Ofrenda::whereBetween('created_at',[$inicio,$fin])
+            ->where('estado','=',true)
             ->get();
             $otros=Ingreso::whereBetween('created_at',[$inicio,$fin])
+            ->where('estado','=',true)
             ->get();
          }else{
              $iglesia=Iglesia::where('email', '=', auth()->user()->email)->first();
              $diezmos=Diezmo::where('iglesias_id', '=', $iglesia->id)
+             ->where('estado','=',true)
              ->whereBetween('created_at', [$inicio,$fin])
              ->get();
              $ofrendas=Ofrenda::where('iglesias_id', '=', $iglesia->id)
+             ->where('estado','=',true)
             ->whereBetween('created_at', [$inicio,$fin])
             ->get();
              $otros=Ingreso::where('iglesias_id', '=', $iglesia->id)
+             ->where('estado','=',true)
             ->whereBetween('created_at', [$inicio,$fin])
             ->get();
          }
@@ -232,17 +241,31 @@ class Dashboar extends Controller
         $vd=[0,0,0,0,0,0,0,0,0,0,0,0];
         $vi=[0,0,0,0,0,0,0,0,0,0,0,0];
 
-
-
-        if(auth()->user()->roll==1){
-
+        if (auth()->user()->roll==1) {
+            for ($i=0;$i<=12-1;$i++) {
+                $ss=$mesall[$i];
+                $k=Diezmo:: where('estado','=',true)->$ss()->get();
+                $q=Ofrenda:: where('estado','=',true)->$ss()->get();
+                $v=Ingreso:: where('estado','=',true)->$ss()->get();
+                $s=0;
+                foreach ($k as $md) {
+                    $vd[$s]+=$md->valor;
+                }
+                foreach ($q as $md) {
+                    $vo[$s]+=$md->ofrenda;
+                }
+                foreach ($v as $md) {
+                    $vi[$s]+=$md->valor;
+                }
+                $s++;
+            }
         }else{
           $iglesia=Iglesia::where('email','=',auth()->user()->email)->first();
           for($i=0;$i<=12-1;$i++){
            $ss=$mesall[$i];
-           $k=Diezmo::where('iglesias_id','=',$iglesia->id)->$ss()->get();
-           $q=Ofrenda::where('iglesias_id','=',$iglesia->id)->$ss()->get();
-           $v=Ingreso::where('iglesias_id','=',$iglesia->id)->$ss()->get();
+           $k=Diezmo::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
+           $q=Ofrenda::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
+           $v=Ingreso::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
             $s=0;
            foreach($k as $md){$vd[$s]+=$md->valor;}foreach($q as $md){$vo[$s]+=$md->ofrenda;}foreach($v as $md){$vi[$s]+=$md->valor;}
            $s++;
@@ -250,7 +273,7 @@ class Dashboar extends Controller
 
         }
         $mesesent=[];$valord=[];$valoro=[];$valori=[];
-     for($i=0;$i<=date('m');$i++){
+     for($i=0;$i<=date('m')-1;$i++){
         $mesesent[$i]=$mesall[$i];
         $valord[$i]=$vd[$i];
         $valoro[$i]=$vo[$i];
@@ -262,7 +285,7 @@ class Dashboar extends Controller
         'labels'=> $mesesent,
         'datasets' => array(['label' => 'Diezmos','backgroundColor'=>'#26B99A','data' => $valord],
                             ['label' => 'Ofrendas','backgroundColor' => '#03586A','data' => $valoro],
-                            ['label' => 'Otros','backgroundColor' => '#17B6B4','data' => $valori]
+                            ['label' => 'Donaciones','backgroundColor' => '#17B6B4','data' => $valori]
                             )
         ];
 

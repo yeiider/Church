@@ -34,11 +34,10 @@ class Iglesias extends Controller
     public function createIglesia(Request $request){
         // poner la contraseña en un input hidden crypt(Str::random(10));
         $verifica=User::where('email','=',$request->email)->first();
-        if($verifica==null)
+        if($verifica!=null)
          return redirect()->back()->with('duplicado','El correo ya se encuentra registrado intente con otro!');
         if(!empty(auth()->user()) && auth()->user()->rol==1){
            // $pass= crypt(Str::random(10));
-
 
 
             if (Iglesia::create([
@@ -154,7 +153,7 @@ class Iglesias extends Controller
       $iglesia->nombre=ucwords($request->nombre);
       $iglesia->telefono=$request->telefono;
       $iglesia->direccion=ucwords($request->direccion);
-      $iglesia->fecha_creacion=date('d-m-Y',strtotime($request->fecha));
+      $iglesia->fecha_creacion=date('Y-m-d',strtotime($request->fecha));
 
       $user->nombre=ucwords($request->user);
       $user->apellido=ucwords($request->apellido);
@@ -177,19 +176,21 @@ class Iglesias extends Controller
          }
      }
 
+
      $config->servicios=$request->servicios;
      if(empty($request->portada)){
         $img2=$config->portada;
       }else{
         $file2=$request->file('portada');
-        $img2 =  date('d-m-y-sh') . $file1->getClientOriginalName();
+        $img2 =  date('d-m-y-sh') . $file2->getClientOriginalName();
       }
       $config->portada=$img2;
 
 
+
       if(!empty($request->portada)){
         array_map('unlink', glob(public_path().'/assets/img/portadas/' . $config->portada));
-        $file2->move(public_path().'assets/img/portadas',$img2);
+        $file2->move(public_path().'/assets/img/portadas',$img2);
       }
       if(!empty($request->perfil)){
         array_map('unlink', glob(public_path().'/assets/img/perfiles/' . $user->logo));

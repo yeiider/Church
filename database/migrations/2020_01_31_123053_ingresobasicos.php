@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubdistritosTable extends Migration
+class Ingresobasicos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,12 @@ class CreateSubdistritosTable extends Migration
      */
     public function up()
     {
-        Schema::create('subdistritos', function (Blueprint $table) {
+        Schema::create('ingresobasicos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('iglesias_id');
+            $table->string('valor');
+            $table->string('motivo');
+            $table->boolean('estado')->default(true);
             $table->timestamps();
         });
     }
@@ -26,6 +30,6 @@ class CreateSubdistritosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subdistritos');
+        Schema::dropIfExists('ingresobasicos');
     }
 }

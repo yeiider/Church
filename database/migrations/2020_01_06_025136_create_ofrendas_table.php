@@ -18,7 +18,8 @@ class CreateOfrendasTable extends Migration
             $table->bigInteger('iglesias_id')->unsigned();
             $table->string('tipo_ofrenda')->nullable();
             $table->string('ofrenda');
-            $table->string('fecha');
+
+            $table->boolean('estado')->default(true);
             $table->string('nota')->nullable();
             $table->foreign('iglesias_id')->references('id')->on('iglesias')
             ->onDelete('cascade')

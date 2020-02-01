@@ -25,7 +25,7 @@ class CreateIngresos extends Migration
             $table->string('ciudad')->nullable();
             $table->string('direccion')->nullable();
             $table->string('telefono')->nullable();
-            $table->string('fecha');
+            $table->string('estado')->default(true);
             $table->string('motivo')->nullable();
             $table->string('valor');
             $table->timestamps();

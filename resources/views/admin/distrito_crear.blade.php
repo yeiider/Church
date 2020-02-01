@@ -11,6 +11,9 @@
       </div>
 
       <div class="clearfix">
+          @if(session('success'))
+      <div class="alert alert-success">{{session('success')}}</div>
+          @endif
         <div id="distrito"></div>
       </div>
        </div>

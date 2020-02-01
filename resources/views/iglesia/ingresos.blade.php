@@ -82,7 +82,7 @@
                     <div class="tile-stats">
                       <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
                       <div class="count" id="ingresos"></div>
-                      <h3>Otros <span class="circle" id="ti"></span></h3>
+                      <h3>Donaciones <span class="circle" id="ti"></span></h3>
                       <p>Cantidad de Otros.</p>
                     </div>
                   </div>

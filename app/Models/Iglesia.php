@@ -46,4 +46,8 @@ public function ofrendas(){
     return $this->hasMany(Ofrenda::class,'iglesias_id','id');
 }
 
+public function scopeId($query){
+    return $query->where('email','=',auth()->user()->email);
+}
+
 }

@@ -1,4 +1,4 @@
-@include('../thema.header')
+@include('thema.header')
 <div class="right_col" role="main">
     <div class="">
         <div class="row">
@@ -6,11 +6,12 @@
                 <?php
     $total=0;
     foreach($donaciones as $p){
+        if($p->estado==true)
         $total+=$p->valor;
     }
     ?>
             <div class="title_left">
-                <h3>Otros Ingresos : <strong style="color:red">${{number_format($total,2,',','.')}}</strong></h3>
+                <h3>Otros Ingresos : <strong class="text-success">${{number_format($total,2,',','.')}}</strong></h3>
             </div>
 
 
@@ -35,7 +36,7 @@
                 @endif
 
                 <script>
-                    function modale(nombre,apellido,cc,razon,nit,telefono,ciudad,direccion,fecha,valor,nota,email,id){
+                    function modale(nombre,apellido,cc,razon,nit,telefono,ciudad,direccion,valor,nota,email,id){
                       var nombreinput = document.getElementById('nombre');
                       var apellidoinput = document.getElementById('apellido');
                       var ccinput=document.getElementById('cc');
@@ -44,7 +45,7 @@
                       var telefonoinput = document.getElementById('telefono');
                       var ciudadinput = document.getElementById('ciudad');
                       var direccioninput=document.getElementById('direccion');
-                      var fechainput = document.getElementById('fecha');
+
                       var valorinput=document.getElementById('valor');
                       var emailinput=document.getElementById('email');
                       var idinput=document.getElementById('id');
@@ -57,7 +58,7 @@
                       telefonoinput.value=telefono
                       ciudadinput.value=ciudad
                       direccioninput.value=direccion
-                      fechainput.value=fecha
+
                       valorinput.value=valor
                       notainput.innerHTML=nota
                       emailinput.value=email
@@ -75,7 +76,7 @@
             <th>N.I.T</th>
             <th>Direccion</th>
 
-            <th>Telefono</th>
+            <th>Estado</th>
 
             <th>Valor</th>
             <th>Accion</th>
@@ -90,7 +91,16 @@
     <td>{{$d->nit}}</td>
     <td>{{$d->direccion}}</td>
 
-    <td>{{$d->telefono}}</td>
+    <td>@switch($d->estado)
+        @case(true)
+    <h5 class="text-white"><span class="bg-success"  style="padding:3px; border-radius:15px">activa</span></h5>
+            @break
+        @case(false)
+        <h5 class="text-white"><span class="bg-danger"  style="padding:3px; border-radius:15px">cancelada</span></h5>
+            @break
+        @default
+
+    @endswitch</td>
 
     <td>${{number_format($d->valor,2,',','.')}}</td>
 <td> <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
@@ -102,12 +112,58 @@
   <div class="dropdown-menu">
     <a class="dropdown-item" data-toggle="modal" data-target=".bs-example-modal-lg" onclick="modale('{{$d->nombre}}',
     '{{$d->apellido}}','{{$d->identificacion}}','{{$d->razon_social}}','{{$d->nit}}',
-    '{{$d->telefono}}','{{$d->ciudad}}','{{$d->direccion}}','{{$d->fecha}}',
+    '{{$d->telefono}}','{{$d->ciudad}}','{{$d->direccion}}',
     '{{number_format($d->valor,2,',','.')}}','{{$d->motivo}}','{{$d->email}}','{{$d->id}}'
     )" >Ver</a>
 
     <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Eliminar</a>
+    @if($d->estado==true)
+    <a class="dropdown-item" href="#" onclick="$.confirm({
+        title: '<h3>Seguro?!</h3>',
+        content: '<h5>Si cancela esta donacion no se contara su valor</h5>',
+        buttons: {
+           confirma:{
+               text:'Cancelar',
+               btnClass:'btn-danger',
+               action:function(){
+
+                  location.href='{{url("Donaciones/estado/{$d->id}")}}'
+               }
+           },
+            cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    $.alert('Proceso cancelado');
+                }
+            }
+        }
+    });">Cancelar <span class="glyphicon glyphicon-ban-circle"></span></a>
+    @else
+    <a class="dropdown-item" href="#" onclick="$.confirm({
+        title: '<h3>Seguro?!</h3>',
+        content: '<h5>Si Activa esta donacion se contara su valor</h5>',
+        buttons: {
+           confirma:{
+               text:'Cancelar',
+               btnClass:'btn-success',
+               action:function(){
+
+                  location.href='{{url("Donaciones/estado/{$d->id}")}}'
+               }
+           },
+            cancelar: {
+                text: 'Cancelar',
+                btnClass: 'btn-default',
+                keys: ['enter', 'shift'],
+                action: function(){
+                    $.alert('Proceso cancelado');
+                }
+            }
+        }
+    });">Activar <span class="glyphicon glyphicon-ok-circle"></span></a>
+    @endif
 
 
   </div></td>
@@ -176,20 +232,18 @@
                     <input type="text" name="telefono" id="telefono" readonly class="form-control">
                 </div>
                 <div class="col-sm-6 col-md-6">
-                   <label for="fecha" class="col-form-label">Fecha de ingreso</label>
-                    <input type="text" name="fecha" id="fecha" readonly class="form-control">
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-6 col-md-6">
                     <label for="telefono" class="col-form-label">Valor</label>
                     <input type="text" name="valor" id="valor" readonly class="form-control">
                 </div>
+
+            </div>
+            <div class="form-group row">
+
                 <input type="hidden" name="id" id="id">
-                <div class="col-sm-6 col-md-6">
+
                    <label for="nota" class="col-form-label">Nota</label>
                    <textarea name="nota" id="nota" readonly cols="10" rows="3" class="form-control"></textarea>
-                </div>
+
             </div>
             {{ csrf_field() }}
         </form>
@@ -208,7 +262,7 @@
 
     </div>
   </div>
-  @include('../thema.footer')
+  @include('thema.footer')
   <script>
 $('#edit').on('click',function(){
     if($(this).hasClass('true')){

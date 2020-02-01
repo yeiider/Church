@@ -17,8 +17,7 @@ class CreateDiezmosTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('iglesias_id')->unsigned();
             $table->bigInteger('miembros_id')->unsigned();
-
-            $table->string('fecha',20);
+            $table->boolean('estado')->default(true);
             $table->string('valor',10);
 
             $table->foreign('iglesias_id')->references('id')->on('iglesias')

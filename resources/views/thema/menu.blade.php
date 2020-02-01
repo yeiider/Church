@@ -61,8 +61,10 @@
                 <li><a href="{{route('ingresos')}}">Ingresos</a></li>
                   <li><a href="{{route('diezmo-add')}}">Ingresar Diezmos</a></li>
                   <li><a href="{{route('ofrenda')}}">Ingresar Ofrenda</a></li>
-                  <li><a href="{{route('donaciones')}}">Otros Ingresos</a></li>
-                  <li><a href="{{url('Ingresos/add')}}">Add Ingreso</a></li>
+                  <li><a href="{{route('donaciones')}}">Lista Donaciones</a></li>
+                  <li><a href="{{url('Donaciones/add')}}">Add Donacion</a></li>
+                  <li><a href="{{route('otros-ingresos')}}">Otros Ingresos</a></li>
+
 
 
                 </ul>

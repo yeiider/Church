@@ -21,9 +21,9 @@ return view('../errors/404');
         $miembros=Miembro::where('iglesias_id','=',$i->id)
         ->where('diezma','=',true)
         ->get();
-        $dia=date('d-m-y');
+
         $diezmos=Diezmo::where('iglesias_id','=',$i->id)
-        ->where('fecha','=',$dia)
+        ->whereDay('created_at',date('d'))
         ->get();
 
         $data=[
@@ -83,22 +83,18 @@ return view('../errors/404');
            return redirect()->back();
         $id_ig=Iglesia::where('email' , '=' , auth()->user()->email)->first();
 
-        $dia=date('d-m-Y');
+
         $v=Diezmo::where('id','=',$request->id)
-        ->where('fecha','=',$dia)->first();
+        ->whereDay('created_at',date('d'))->first();
         if($v!==null)
         return redirect()->back()->with('duplicado','Ya existe un diezmante');
        if(Diezmo::create([
             'iglesias_id' => $id_ig->id,
             'miembros_id' => $request->id,
             'valor' => $request->diezmo,
-            'fecha' => date('d-m-y')
+
         ])){
-            Caja::create([
-                'iglesias_id' => $id_ig->id,
-                'ingreso' => $request->diezmo,
-                'egreso' => 0
-            ]);
+
             return redirect()->back()->with('success','Se Añadio el diezmo Correctamente');
         }
     }

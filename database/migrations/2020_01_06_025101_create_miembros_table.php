@@ -21,12 +21,12 @@ class CreateMiembrosTable extends Migration
             $table->string('identificacion',20)->nullable();
             $table->string('genero',10);
             $table->string('edad',2)->nullable();
-            $table->string('fecha_nacimiento')->nullable();
+            $table->date('fecha_nacimiento')->nullable();
             $table->string('estado_civil')->nullable();
             $table->string('num_hijos',2)->nullable();
             $table->boolean('diezma');
             $table->string('estado',10)->nullable();
-            $table->string('fecha_inicio',20)->nullable();
+            $table->date('fecha_inicio',20)->nullable();
             $table->boolean('empleado');
             $table->integer('estrato');
             $table->string('etnia')->nullable();

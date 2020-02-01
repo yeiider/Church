@@ -58,6 +58,7 @@
                     <th>Nombre</th>
                     <th>Fecha</th>
                     <th>Valor</th>
+                    <th>Option</th>
                   </tr>
 
               </thead>
@@ -66,8 +67,9 @@
                   @foreach ($data['diezmos'] as $d)
                   <tr>
                   <td>{{$d->miembro->nombres .' ' .$d->miembro->apellidos}}</td>
-                  <td>{{$d->fecha}}</td>
+                  <td>{{date('d-m-Y',strtotime($d->created_at))}}</td>
                   <td>${{number_format($d->valor,2,',','.') }}</td>
+                  <td><a href="{{url("Diezmo/drop/{$d->id}")}}" class="btn btn-danger"><span class="fa fa-trash"></span></a></td>
 
                   </tr>
                   <?php $total+=$d->valor;?>
@@ -75,6 +77,7 @@
                   <tr>
                       <td colspan="2"><strong>TOTAL</strong></td>
                       <td>${{number_format($total,2,',','.')}}</td>
+                      <td></td>
                   </tr>
 
               </tbody>

@@ -99,25 +99,21 @@
             </div>
 
             <div class="col-sm-6 col-md-6">
-                <label class="label-align" for="direccion">Fecha
+                <label class="label-align" for="valor">Valor <strong>$</strong>
                 </label>
-                <input type="date" id="fecha"  name="fecha"   aria-describedby="basic-addon2" class="form-control"/>
+                <input type="text" id="valor"  name="valor"   aria-describedby="basic-addon2" class="form-control"/>
             </div>
 
           </div>
           <div class="form-group row">
 
-            <div class="col-sm-6 col-md-6">
+
                 <label class="label-align" for="motivo">Motivo
                 </label>
             <textarea name="motivo" id="motivo" cols="30" rows="3" class="form-control"></textarea>
-            </div>
 
-            <div class="col-sm-6 col-md-6">
-                <label class="label-align" for="valor">Valor <strong>$</strong>
-                </label>
-                <input type="text" id="valor"  name="valor"   aria-describedby="basic-addon2" class="form-control"/>
-            </div>
+
+
 
           </div>
 

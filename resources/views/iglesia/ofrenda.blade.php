@@ -17,14 +17,7 @@
         <div class="row">
           <div class="col-sm-4 col-md-4">
           <form action="{{route('ofrenda-add')}}" method="post">
-            <div class="form-group row">
 
-                <label class="col-form-label label-align" for="fecha">Fecha<span class="required">*</span>
-                </label>
-
-            <input type="date" id="fecha" name="fecha" value="{{date('Y-d-m')}}" required class="form-control " />
-
-              </div>
             <div class="form-group row">
                 <label class="col-form-label label-align" for="ofrenda">Valor<span class="required">*</span>
                 </label>
@@ -104,7 +97,7 @@
             @default
 
         @endswitch</td>
-        <td>{{$o->fecha}}</td>
+        <td>{{date('d-m-Y',strtotime($o->created_at))}}</td>
         <td>{{$o->nota}}</td>
         <td>${{number_format($o->ofrenda,2,',','.')}}</td>
         </tr>

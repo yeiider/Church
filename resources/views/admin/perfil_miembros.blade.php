@@ -192,7 +192,7 @@ $total+=$t->valor;
                    @foreach ($miembro->diezmos as $d)
 
                    <tr>
-                   <td>{{$d->fecha}}</td>
+                   <td>{{date('d-m-Y',strtotime($d->created_at))}}</td>
                    <td>${{number_format($d->valor,2,',','.')}}</td>
 
                    </tr>
@@ -224,7 +224,7 @@ $total+=$t->valor;
 
 
 
-@include('../thema.footer')
+@include('thema.footer')
 
 <script>
     $("#empleado option[value="+ {{$miembro->empleado}} +"]").attr("selected",true);

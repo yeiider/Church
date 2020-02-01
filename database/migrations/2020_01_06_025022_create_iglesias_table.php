@@ -24,7 +24,7 @@ class CreateIglesiasTable extends Migration
             $table->string('municipio',20)->nullable();
             $table->string('direccion',30)->nullable();
             $table->string('telefono',30)->nullable();
-            $table->string('fecha_creacion',30)->nullable();
+            $table->date('fecha_creacion',30)->nullable();
             $table->integer('estado');
             $table->string('iglesias_hijas',30)->nullable();
             $table->string('logo')->nullable();
