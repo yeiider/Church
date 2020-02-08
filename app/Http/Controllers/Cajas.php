@@ -5,7 +5,9 @@ use App\Models\Caja;
 use App\Models\Diezmo;
 use App\Models\Iglesia;
 use App\Models\Ingreso;
+use App\Models\Ingreso2;
 use App\Models\Ofrenda;
+use App\Models\OtroIngreso;
 use Illuminate\Http\Request;
 
 class Cajas extends Controller
@@ -19,7 +21,8 @@ class Cajas extends Controller
 
             $ofrenda=Ofrenda::whereDay('created_at',date('d'))->get();
 
-            $ingresos=Ingreso::whereDay('created_at',date('d'))->get();
+            $donaciones=Ingreso::whereDay('created_at',date('d'))->get();
+            $otros=Ingreso2::whereDay('created_at',date('d'))->get();
         }else{
 
         $iglesia=Iglesia::Id()->first();
@@ -31,7 +34,10 @@ class Cajas extends Controller
         ->where('estado','=',true)
         ->whereDay('created_at',date('d'))->get();
 
-        $ingresos=Ingreso::where('iglesias_id','=',$iglesia->id)
+        $donaciones=Ingreso::where('iglesias_id','=',$iglesia->id)
+        ->where('estado','=',true)
+        ->whereDay('created_at',date('d'))->get();
+        $otros=Ingreso2::where('iglesias_id','=',$iglesia->id)
         ->where('estado','=',true)
         ->whereDay('created_at',date('d'))->get();
 
@@ -47,12 +53,14 @@ class Cajas extends Controller
         $data=[
           'diezmos' => valor($diezmos,'valor'),
           'ofrendas' => valor($ofrenda,'ofrenda'),
-          'ingresos' => valor($ingresos,'valor'),
+          'donaciones' => valor($donaciones,'valor'),
+          'otros' => valor($otros,'valor'),
           'cd' => $diezmos->count(),
           'co' => $ofrenda->count(),
-          'ci' => $ingresos->count()
+          'ci' => $donaciones->count(),
+          'cotros' => $otros->count()
         ];
-
+//return date('h:i');
         return view('admin/caja' , compact('data'));
     }
 

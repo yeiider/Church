@@ -11,6 +11,8 @@ use App\Models\Distrito;
 use App\Models\Ofrenda;
 use App\Models\Diezmo;
 use App\Models\Ingreso;
+use App\Models\Ingreso2;
+use App\Models\OtroIngreso;
 use Illuminate\Http\Request;
 
 
@@ -178,7 +180,10 @@ class Dashboar extends Controller
             $ofrendas=Ofrenda::whereBetween('created_at',[$inicio,$fin])
             ->where('estado','=',true)
             ->get();
-            $otros=Ingreso::whereBetween('created_at',[$inicio,$fin])
+            $donaciones=Ingreso::whereBetween('created_at',[$inicio,$fin])
+            ->where('estado','=',true)
+            ->get();
+            $otro=Ingreso2::whereBetween('created_at',[$inicio,$fin])
             ->where('estado','=',true)
             ->get();
          }else{
@@ -191,7 +196,11 @@ class Dashboar extends Controller
              ->where('estado','=',true)
             ->whereBetween('created_at', [$inicio,$fin])
             ->get();
-             $otros=Ingreso::where('iglesias_id', '=', $iglesia->id)
+             $donaciones=Ingreso::where('iglesias_id', '=', $iglesia->id)
+             ->where('estado','=',true)
+            ->whereBetween('created_at', [$inicio,$fin])
+            ->get();
+             $otros=Ingreso2::where('iglesias_id', '=', $iglesia->id)
              ->where('estado','=',true)
             ->whereBetween('created_at', [$inicio,$fin])
             ->get();
@@ -199,28 +208,35 @@ class Dashboar extends Controller
 
          $totalDiezmos=0;
          $totalOfrendas=0;
-         $totalIngresos=0;
+         $totaldonaciones=0;
+         $totalotros=0;
 
-         foreach($diezmos as $d)
-         $totalDiezmos+=$d->valor;
+      function valor($data,$key){
+          $rest=0;
+          foreach($data as $d){
+              $rest+=$d->$key;
+          }
+          return $rest;
+      }
 
-         foreach($ofrendas as $o)
-         $totalOfrendas+=$o->ofrenda;
-
-         foreach($otros as $t)
-         $totalIngresos+=$t->valor;
+         $totalDiezmos=valor($diezmos,'valor');
+         $totalOfrendas=valor($ofrendas,'ofrenda');
+         $totaldonaciones=valor($donaciones,'valor');
+         $totalotros=valor($otros,'valor');
 
          // return $totalDiezmos.' '. $totalOfrendas .' '.$totalIngresos;
          $data=[
              'tdiezmos' => number_format($totalDiezmos,0,',','.'),
              'tofrendas' => number_format($totalOfrendas,0,',','.'),
-             'tingresos' => number_format($totalIngresos,0,',','.'),
+             'tdonaciones' => number_format($totaldonaciones,0,',','.'),
+             'totros' => number_format($totalotros,0,',','.'),
 
              'diezmos' => $diezmos->count(),
              'ofrendas' => $ofrendas->count(),
-             'ingresos' => $otros->count(),
-             'total' => number_format($totalDiezmos + $totalIngresos +$totalOfrendas,0,',','.'),
-             't'=> $diezmos->count() + $ofrendas->count() + $otros->count()
+             'donaciones' => $donaciones->count(),
+             'otros' => $otros->count(),
+             'total' => number_format($totalDiezmos + $totaldonaciones +$totalOfrendas + $totalotros,0,',','.'),
+             't'=> $diezmos->count() + $ofrendas->count() + $otros->count()+$donaciones->count()
 
              ];
 
@@ -240,6 +256,16 @@ class Dashboar extends Controller
         $vo=[0,0,0,0,0,0,0,0,0,0,0,0];
         $vd=[0,0,0,0,0,0,0,0,0,0,0,0];
         $vi=[0,0,0,0,0,0,0,0,0,0,0,0];
+        $ot=[0,0,0,0,0,0,0,0,0,0,0,0];
+
+        function valor($data,$key){
+            $rest=0;
+         foreach($data as $d){
+            $rest+=$d->$key;
+         }
+
+         return $rest;
+        }
 
         if (auth()->user()->roll==1) {
             for ($i=0;$i<=12-1;$i++) {
@@ -247,37 +273,40 @@ class Dashboar extends Controller
                 $k=Diezmo:: where('estado','=',true)->$ss()->get();
                 $q=Ofrenda:: where('estado','=',true)->$ss()->get();
                 $v=Ingreso:: where('estado','=',true)->$ss()->get();
+                $o=OtroIngreso:: where('estado','=',true)->$ss()->get();
                 $s=0;
-                foreach ($k as $md) {
-                    $vd[$s]+=$md->valor;
-                }
-                foreach ($q as $md) {
-                    $vo[$s]+=$md->ofrenda;
-                }
-                foreach ($v as $md) {
-                    $vi[$s]+=$md->valor;
-                }
-                $s++;
+                $vd[$i]+=valor($k,'value');
+                $vo[$i]+=valor($q,'ofrenda');
+                $vi[$i]+=valor($v,'valor');
+
             }
         }else{
           $iglesia=Iglesia::where('email','=',auth()->user()->email)->first();
           for($i=0;$i<=12-1;$i++){
            $ss=$mesall[$i];
-           $k=Diezmo::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
+           $k=Diezmo::where('iglesias_id','=',$iglesia->id)->$ss()->where('estado','=',true)->get();
            $q=Ofrenda::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
            $v=Ingreso::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
-            $s=0;
-           foreach($k as $md){$vd[$s]+=$md->valor;}foreach($q as $md){$vo[$s]+=$md->ofrenda;}foreach($v as $md){$vi[$s]+=$md->valor;}
+           $o=OtroIngreso::where('iglesias_id','=',$iglesia->id)->where('estado','=',true)->$ss()->get();
+           $s=0;
+           $vd[$i]+=valor($k,'valor');
+           $vo[$i]+=valor($q,'ofrenda');
+           $vi[$i]+=valor($v,'valor');
+           $ot[$i]+=valor($o,'valor');
            $s++;
           }
 
         }
-        $mesesent=[];$valord=[];$valoro=[];$valori=[];
+
+
+        $mesesent=[];$valord=[0,0,0,0,0,0,0,0,0,0,0,0];$valoro=[0,0,0,0,0,0,0,0,0,0,0,0];$valori=[0,0,0,0,0,0,0,0,0,0,0,0];
+        $valorotros=[0,0,0,0,0,0,0,0,0,0,0,0];
      for($i=0;$i<=date('m')-1;$i++){
         $mesesent[$i]=$mesall[$i];
         $valord[$i]=$vd[$i];
         $valoro[$i]=$vo[$i];
         $valori[$i]=$vi[$i];
+        $valorotros[$i]=$ot[$i];
      }
 
      $labels=[];
@@ -285,7 +314,8 @@ class Dashboar extends Controller
         'labels'=> $mesesent,
         'datasets' => array(['label' => 'Diezmos','backgroundColor'=>'#26B99A','data' => $valord],
                             ['label' => 'Ofrendas','backgroundColor' => '#03586A','data' => $valoro],
-                            ['label' => 'Donaciones','backgroundColor' => '#17B6B4','data' => $valori]
+                            ['label' => 'Donaciones','backgroundColor' => '#17B6B4','data' => $valori],
+                            ['label' => 'Otros','backgroundColor' => '#C377F1','data' => $valorotros]
                             )
         ];
 

@@ -58,7 +58,10 @@
             </li>
             <li><a><i class="fa fa-cubes"></i> Ingresos <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                <li><a href="{{route('ingresos')}}">Ingresos</a></li>
+                  @if(auth()->user()->rol==1)
+                  <li><a href="{{route('tipo_ingreso')}}">Agregar tipo ingreso</a></li>
+                  @endif
+                  <li><a href="{{route('ingresos')}}">Ingresos</a></li>
                   <li><a href="{{route('diezmo-add')}}">Ingresar Diezmos</a></li>
                   <li><a href="{{route('ofrenda')}}">Ingresar Ofrenda</a></li>
                   <li><a href="{{route('donaciones')}}">Lista Donaciones</a></li>
@@ -87,7 +90,7 @@
             </li>
             <li><a><i class="fa fa-calendar"></i>Actividades <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
-                  <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+                <li><a href="{{route('actividades')}}">Actividades</a></li>
                   <li><a href="fixed_footer.html">Fixed Footer</a></li>
                 </ul>
               </li>

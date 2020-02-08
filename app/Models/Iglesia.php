@@ -50,4 +50,8 @@ public function scopeId($query){
     return $query->where('email','=',auth()->user()->email);
 }
 
+public function actividades (){
+    return $this->hasMany(Activida::class,'iglesias_id','id');
+}
+
 }

@@ -64,3 +64,18 @@ Route::get('/Caja/data-fecha','Cajas@sendMonth')->name('data-caja');
 Route::get('/Ingresos/Otros','Ingresos@otrosIngresos')->name('otros-ingresos');
 Route::get('Diezmo/drop/{id}','Ingresos@dropDiezmo')->name('drop-diezmo');
 Route::get('/Donaciones/estado/{id}','Ingresos@donacionesEstado')->name('donaciones-estado');
+Route::get('/Ingreso/tipo','Ingresos@tipoIngreso')->name('tipo_ingreso');
+Route::post('/Ingreso/tipo_set','Ingresos@tipoCreate')->name('tipo_set');
+Route::post('/Ingreso/create/other','Ingresos@createOtroIngreso')->name('crear-otro-ingreso');
+Route::get('/Configuraciones','Configuraciones@index')->name('config');
+Route::post('/Cuenta/Crear','Cuentas@create')->name('crear-cuenta');
+Route::get('/Cuentas/drop/{id}','Cuentas@drop')->name('drop-cuentas');
+
+Route::get('/Ingresos/Statec/{id}','Ingresos@cambiarEstado')->name('change-statec');
+Route::get('/Egresos','Egresos@index')->name('egresos');
+
+// actividades //
+
+Route::get('/Actividades','Actividades@index')->name('actividades');
+Route::post('/Actividades/set','Actividades@create')->name('crear-actividad');
+

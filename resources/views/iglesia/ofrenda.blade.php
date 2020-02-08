@@ -30,10 +30,10 @@
                 </label>
               <select name="tipo" id="tipo" required class="form-control">
                   <option value="">Seleccione</option>
-                  <option value="1">Ofrenda General</option>
-                  <option value="2">Ofrenda Pro-Templo</option>
-                  <option value="3">Ofrenda Voluntaria</option>
-                  <option value="4">Otro Tipo de Ofrenda</option>
+                  <option value="41709502">Ofrenda</option>
+                  <option value="41709503">Ofrenda Especiales</option>
+                  <option value="41709504">Ofrenda G.I.F</option>
+                  <option value="42950503">Pro-Templo</option>
               </select>
               </div>
               <div class="form-group row">

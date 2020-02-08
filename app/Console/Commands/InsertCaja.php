@@ -6,7 +6,9 @@ use App\Models\Caja;
 use App\Models\Diezmo;
 use App\Models\Iglesia;
 use App\Models\Ingreso;
+use App\Models\Ingreso2;
 use App\Models\Ofrenda;
+use App\Models\OtroIngreso;
 use Illuminate\Console\Command;
 
 class InsertCaja extends Command
@@ -60,10 +62,12 @@ class InsertCaja extends Command
 
         $iglesias=Iglesia::all();
         foreach($iglesias as $i){
-        $ingreso=Ingreso::where('iglesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
-        $diezmos=Diezmo::where('iglesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
+        $donaciones=Ingreso::where('iglesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
+        $diezmos=Diezmo::where('iglegresoesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
         $ofrendas=Ofrenda::where('iglesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
-        $totalingresos=valor($ingreso,'valor')+valor($diezmos,'valor')+valor($ofrendas,'ofrenda');
+        $otros=Ingreso2::where('iglesias_id','=',$i->id)->whereDay('created_at',date('d'))->get();
+
+        $totalingresos=valor($donaciones,'valor')+valor($diezmos,'valor')+valor($ofrendas,'ofrenda')+valor($otros,'valor');
         agregarCaja($i->id,$totalingresos,10000);
       }
 

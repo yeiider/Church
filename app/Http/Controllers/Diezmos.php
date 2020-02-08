@@ -5,6 +5,7 @@ use App\Models\Miembro;
 use App\Models\Iglesia;
 use App\Models\Diezmo;
 use App\Models\Caja;
+use App\Models\Cuenta;
 use Illuminate\Http\Request;
 
 class Diezmos extends Controller
@@ -94,7 +95,6 @@ return view('../errors/404');
             'valor' => $request->diezmo,
 
         ])){
-
             return redirect()->back()->with('success','Se Añadio el diezmo Correctamente');
         }
     }

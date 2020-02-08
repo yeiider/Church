@@ -83,6 +83,14 @@
                       <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
                       <div class="count" id="ingresos"></div>
                       <h3>Donaciones <span class="circle" id="ti"></span></h3>
+                      <p>Cantidad de Donaciones.</p>
+                    </div>
+                  </div>
+                  <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 ">
+                    <div class="tile-stats">
+                      <div class="icon"><i class="fa fa-sort-amount-desc"></i></div>
+                      <div class="count" id="otro"></div>
+                      <h3>Otros Ingresos <span class="circle" id="ot">1</span></h3>
                       <p>Cantidad de Otros.</p>
                     </div>
                   </div>
@@ -179,8 +187,10 @@ function cb(start, end) {
          $('#td').html(rest.diezmos)
          $('#ofrendas').html(rest.tofrendas)
          $('#to').html(rest.ofrendas)
-         $('#ingresos').html(rest.tingresos)
-         $('#ti').html(rest.ingresos)
+         $('#ingresos').html(rest.tdonaciones)
+         $('#otro').html(rest.totros)
+         $('#ot').html(rest.otros)
+         $('#ti').html(rest.donaciones)
          $('#total').html(rest.total)
          $('#t').html(rest.t)
         }

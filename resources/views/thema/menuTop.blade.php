@@ -11,7 +11,7 @@
             </a>
             <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item"  href="{{route('perfil-user')}}"> Profile</a>
-                <a class="dropdown-item"  href="#">
+            <a class="dropdown-item"  href="{{route('config')}}">
                   <span class="badge bg-red pull-right">50%</span>
                   <span>Settings</span>
                 </a>

@@ -64,7 +64,7 @@
           </div>
 
           <div class="col-md-6 col-md-6">
-          <h1>Ingresos        <span><strong class="text-success" style="margin-letf:20px">${{number_format($data['diezmos']+$data['ofrendas']+$data['ingresos'],2,',','.')}}</strong></span></h1>
+          <h1>Ingresos        <span><strong class="text-success" style="margin-letf:20px">${{number_format($data['diezmos']+$data['ofrendas']+$data['donaciones']+$data['otros'],2,',','.')}}</strong></span></h1>
             <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
                 <div class="col-sm-8">
                 <h3>Diezmos <strong class="text-info">${{number_format($data['diezmos'],2,',','.')}}</strong></h3>
@@ -87,8 +87,17 @@
             </div>
             <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
                 <div class="col-sm-8">
-                    <h3>Donaciones <strong class="text-info">${{number_format($data['ingresos'],2,',','.')}}</strong></h3>
-                    <h5>Total de otros  <strong style="margin-right:-20px">{{$data['ci']}}</strong></h5>
+                    <h3>Donaciones <strong class="text-info">${{number_format($data['donaciones'],2,',','.')}}</strong></h3>
+                    <h5>Total de Donaciones  <strong style="margin-right:-20px">{{$data['ci']}}</strong></h5>
+                </div>
+                <div class="col-sm-4">
+                 <span class="glyphicon glyphicon-hand-up fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>
+                </div>
+            </div>
+            <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
+                <div class="col-sm-8">
+                    <h3>Otros Ingresos <strong class="text-info">${{number_format($data['otros'],2,',','.')}}</strong></h3>
+                    <h5>Total de otros  <strong style="margin-right:-20px">{{$data['cotros']}}</strong></h5>
                 </div>
                 <div class="col-sm-4">
                  <span class="glyphicon glyphicon-hand-up fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>

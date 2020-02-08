@@ -27,6 +27,7 @@
     <link href="{{asset('assets/vendors/jqvmap/dist/jqvmap.min.css')}}" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css')}}" rel="stylesheet">
 
     <!--Tables-->
 
@@ -39,17 +40,29 @@
     <link href="{{asset('assets/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="{{asset('assets/build/css/custom.min.css')}}" rel="stylesheet">
-    <link href="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.css')}}" rel="stylesheet">
+
     <link href="{{asset('assets/vendors/select2/dist/css/select2.min.css" rel="stylesheet')}}">
     <!-- Switchery -->
     <link href="{{asset('assets/vendors/starrr/dist/starrr.css')}}" rel="stylesheet">
     <link href="{{asset('assets/vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendors/fullcalendar/dist/fullcalendar.print.css')}}" rel="stylesheet" media="print">
+    <link href="{{asset('assets/vendors/mjolnic-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/vendors/fullcalendar/dist/fullcalendar.min.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{asset('assets/js-custon/jquery-confirm.min.css')}}">
 
 
 
     <link rel="stylesheet" href="{{asset('assets/chossen/docsupport/prism.css')}}">
     <link rel="stylesheet" href="{{asset('assets/chossen/chosen.css')}}">
+    <style>
+    .radio{
+        border-radius: 15px;
+        padding: 5px;
+        color: white;
+        background-color:cadetblue;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+    }
+    </style>
 </head>
 <body class="nav-md">
     <body class="nav-md">

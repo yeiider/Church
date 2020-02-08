@@ -47,6 +47,6 @@ public function scopeNoviembre($query){
     return $query->whereMonth('created_at','11');
    }
 public function scopeDiciembre($query){
-    return $query->whereMonth('created_at','05');
+    return $query->whereMonth('created_at','12');
    }
 }

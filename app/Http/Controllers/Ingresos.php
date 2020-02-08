@@ -5,8 +5,11 @@ use App\Models\Diezmo;
 use App\Models\Iglesia;
 use App\Models\Ofrenda;
 use App\Models\Caja;
+use App\Models\Cuenta;
 use App\Models\Ingreso;
+use App\Models\Ingreso2;
 use App\Models\OtroIngreso;
+use App\Models\TipoIngreso;
 use Illuminate\Http\Request;
 
 class Ingresos extends Controller
@@ -44,7 +47,28 @@ class Ingresos extends Controller
            'nota' => $request->nota,
            'tipo_ofrenda' => $request->tipo
         ])){
-
+    switch($request->tipo){
+       case '41709502':
+       $cuenta=Cuenta::where('cuenta','=','41709502')->first();
+       $cuenta->credito+=$request->ofrenda;
+       $cuenta->save();
+        break;
+        case '41709503':
+        $cuenta=Cuenta::where('cuenta','=','41709503')->first();
+        $cuenta->credito+=$request->ofrenda;
+        $cuenta->save();
+        break;
+        case '41709504':
+        $cuenta=Cuenta::where('cuenta','=','41709504')->first();
+        $cuenta->credito+=$request->ofrenda;
+        $cuenta->save();
+        break;
+        case '42950503':
+        $cuenta=Cuenta::where('cuenta','=','42950503')->first();
+        $cuenta->credito+=$request->ofrenda;
+        $cuenta->save();
+        break;
+    }
      return redirect()->back()->with('success','Se registro la ofrenda correctamente');
         }else{
             return redirect()->with('error','Error inesperado intente de nuevo mas tarde');
@@ -111,10 +135,21 @@ class Ingresos extends Controller
         if(empty(auth()->user())){
             return redirect('/');
         }
-        $iglesia=Iglesia::Id()->first();
-        $ingresos=OtroIngreso::where('iglesias_id','=',$iglesia->id)->get();
+        if(auth()->user()->rol==1){
+            $ingresos=Ingreso2::all();
+        }else{
+            $iglesia=Iglesia::Id()->first();
+            $ingresos=Ingreso2::where('iglesias_id', '=', $iglesia->id)->get();
 
-        return view('iglesia/otros_ingresos',compact('ingresos'));
+        }
+        $cuenta=Cuenta::where('cuenta', 'LIKE', '4%')
+        ->get();
+        $data=[
+         'cuentas' => $cuenta,
+         'ingresos' => $ingresos
+        ];
+
+        return view('iglesia/otros_ingresos',compact('data'));
     }
 
     public function donacionesEstado($id){
@@ -132,5 +167,43 @@ class Ingresos extends Controller
     public function dropDiezmo($id){
       Diezmo::destroy($id);
       return redirect()->back();
+    }
+
+    public function tipoIngreso(){
+        $tipo=TipoIngreso::all();
+        return view('admin/tipo_ingreso',compact('tipo'));
+    }
+
+    public function tipoCreate(Request $request){
+        if(tipoIngreso::create([
+            'codigo' => $request->codigo,
+            'nombre' => $request->nombre
+        ])){
+            return redirect()->back()->with('success','Se registro el ingreso correctamente');
+        };
+    }
+
+    public function createOtroIngreso(Request $request){
+        $iglesia=Iglesia::Id()->first();
+
+     if($tros=Ingreso2::create([
+          'iglesias_id' =>  $iglesia->id,
+          'cuentas_id' => $request->tipo,
+          'valor' => $request->valor,
+      ])){
+          return redirect()->back();
+      }
+    }
+
+    public function cambiarEstado($id){
+        $ingreso=Ingreso2::find($id);
+        if($ingreso->estado){
+          $ingreso->estado=false;
+        }else{
+         $ingreso->estado=true;
+        }
+
+        $ingreso->save();
+        return redirect()->back();
     }
 }

@@ -1,6 +1,6 @@
 <footer>
     <div class="pull-right">
-     IUMEC - Admin Tools 2020
+    IUMEC - Admin Tools {{date('Y  T  H:i')}}
     </div>
     <div class="clearfix"></div>
   </footer>
@@ -35,6 +35,7 @@
 <script src="{{asset('assets/vendors/Flot/jquery.flot.resize.js')}}"></script>
 <!--Chosen-->
 
+<script src="{{asset('assets/vendors/mjolnic-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js')}}"></script>
 <script src="{{asset('assets/vendors/devbridge-autocomplete/dist/jquery.autocomplete.min.js')}}"></script>
 <script src="{{asset('assets/chossen/chosen.jquery.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/chossen/docsupport/prism.js')}}" type="text/javascript" charset="utf-8"></script>
@@ -63,12 +64,22 @@
 
 <!--Tables-->
 
+
+<!--DataPiker-->
+<script src="{{asset('assets/vendors/bootstrap-daterangepicker/daterangepicker.js')}}"></script>
+<!-- bootstrap-datetimepicker -->
+<script src="{{asset('assets/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')}}"></script>
+<!--end-->
     <script src="{{asset('assets/vendors/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/moment/min/moment.min.js')}}"></script>
+    <script src="{{asset('assets/vendors/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+
+
     <script src="{{asset('assets/vendors/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js')}}"></script>
     <script src="{{asset('assets/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js')}}"></script>
