@@ -11,7 +11,13 @@
       <div class="clearfix">
 
         <div class="col-md-6 col-sm-6" style="margin-top:20px">
+            @if(session('error'))
+            <div class="alert alert-info alert-dismissible" role="alert"><p style="font-size:17px"><strong>{{session('error')}}!</strong></p>
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span>
+              </button></div>
+                @endif
             <div class="x_panel">
+                <h3>Total Efectivo  <span><strong class="text-success" style="margin-letf:20px">${{number_format($data['caja'],0,',','.')}}</strong></span></h3>
               <div class="x_title">
 
                  <select class="select-chossen form-control col-xs-6 col-md-6 mes" id="mes" name="mes" style="border-radius:15px">
@@ -64,7 +70,7 @@
           </div>
 
           <div class="col-md-6 col-md-6">
-          <h1>Ingresos        <span><strong class="text-success" style="margin-letf:20px">${{number_format($data['diezmos']+$data['ofrendas']+$data['donaciones']+$data['otros'],2,',','.')}}</strong></span></h1>
+          <h1>Ingresos        <span><strong class="text-success" style="margin-letf:20px">${{number_format($data['diezmos']+$data['ofrendas']+$data['donaciones']+$data['otros'],0,',','.')}}</strong></span></h1>
             <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
                 <div class="col-sm-8">
                 <h3>Diezmos <strong class="text-info">${{number_format($data['diezmos'],2,',','.')}}</strong></h3>
@@ -103,29 +109,21 @@
                  <span class="glyphicon glyphicon-hand-up fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>
                 </div>
             </div>
-            <h1>Egresos        <span><strong class="text-danger">$500.000</strong></span></h1>
+        <h1>Egresos        <span><strong class="text-danger">${{number_format($data['nomina']+$data['egreso'],0,',','.')}}</strong></span></h1>
             <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
                 <div class="col-sm-8">
-                    <h3>Nominas <strong class="text-info">$100.000</strong></h3>
-                    <h5>Total de dominas  <strong style="margin-right:-20px">10</strong></h5>
+                <h3>Nominas <strong class="text-info">${{number_format($data['nomina'],2,',','.')}}</strong></h3>
+                <h5>Total de Nominas  <strong style="margin-right:-20px">{{$data['nomina_c']}}</strong></h5>
                 </div>
                 <div class="col-sm-4">
                  <span class="glyphicon glyphicon-hand-down fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>
                 </div>
             </div>
+
             <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
                 <div class="col-sm-8">
-                    <h3>Pagos Menores <strong class="text-info">$100.000</strong></h3>
-                    <h5>Total de pagos menores  <strong style="margin-right:-20px">10</strong></h5>
-                </div>
-                <div class="col-sm-4">
-                 <span class="glyphicon glyphicon-hand-down fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>
-                </div>
-            </div>
-            <div class="form-group row" style="background-color:white; border-radius:15px; padding:15px">
-                <div class="col-sm-8">
-                    <h3>Otros <strong class="text-info">$100.000</strong></h3>
-                    <h5>Total de otros pagos  <strong style="margin-right:-20px">10</strong></h5>
+                    <h3>Otros <strong class="text-info">${{number_format($data['egreso'],2,',','.')}} </strong></h3>
+                <h5>Total de Otros Egresos <strong style="margin-right:-20px">{{$data['egreso_c']}}</strong></h5>
                 </div>
                 <div class="col-sm-4">
                  <span class="glyphicon glyphicon-hand-down fa-lg glyphicon-lg fa-5x" style=" width:30; height:10;"></span>

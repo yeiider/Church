@@ -16,4 +16,15 @@ class Activida extends Model
 public function iglesia(){
     return $this->belongsTo(Iglesia::class,'iglesias_id','id');
 }
+
+public function scopePublic($query){
+    $iglesia=Iglesia::Id()->first();
+  $query->when(request('publico')==1,function($q){
+      return $q->where('publico','=',1);
+  });
+  $query->when(request(('publico')==3),function($q){
+     $iglesia=Iglesia::Id()->first();
+      return $q->where('iglesias_id','=',$iglesia->id);
+  });
+}
 }

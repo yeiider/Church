@@ -97,7 +97,10 @@
 <!-- Custom Theme Scripts -->
 
 <script src="{{asset('assets/chossen/docsupport/init.js')}}"></script>
-
+<script src="{{asset('assets/vendors/parsleyjs/dist/parsley.min.js')}}"></script>
+<!-- Autosize -->
+<script src="{{asset('assets/vendors/autosize/dist/autosize.min.js')}}"></script>
+<script src="{{asset('assets/vendors/starrr/dist/starrr.js')}}"></script>
 <!-- Custom Theme Scripts -->
 <script src="{{asset('assets/build/js/custom.js')}}"></script>
 <script src="{{asset('assets/js-custon/chart_dashboard.js')}}"></script>

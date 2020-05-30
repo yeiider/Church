@@ -6,7 +6,7 @@
       <div class="clearfix">
 
         <div class="col-sm-12 col-md-12"  >
-        <img src="{{asset('assets/img/portadas/'.$data['config']->portada)}}" alt="" style="width:100%; height: 400px;" >
+        <img src="{{asset('assets/iglesias/'.str_replace(" ","-",$data['iglesia']->nombre).'/portadas/'.$data['config']->portada)}}" alt="" style="width:100%; height: 400px;" >
 
         </div>
 
@@ -15,7 +15,7 @@
             <div class="col-sm-3 col-md-3" style="margin-top:-10%">
                       <div class="row" style="">
                         <a href="#" class="" >
-                        <img src="{{asset('assets/img/perfiles/' . $data['user']->logo)}}" style="border-radius:20px;width:100%">
+                        <img src="{{asset('assets/iglesias/'.str_replace(" ","-",$data['iglesia']->nombre).'/perfiles/' . $data['iglesia']->logo)}}" style="border-radius:20px;width:100%">
                           </a>
                       </div>
 
@@ -215,44 +215,29 @@
 
             <div class="col-sm-3 col-md-3" style="margin-top:5%">
                 <ul class="list-unstyled timeline">
+                    @foreach ($data['iglesia']->actividades as $a)
+
+
                     <li>
                       <div class="block">
                         <div class="tags">
-                          <a href="" class="tag">
-                            <span class="">Congreso</span>
+                        <a href="{{url("Actividad/view/{$a->id}")}}" target="_blank" class="tag">
+                          <span class="">{{$a->tipo}}</span>
                           </a>
                         </div>
                         <div class="block_content">
                           <h2 class="title">
-                                          <a>Congreso Femenik</a>
+                          <a>{{$a->titulo}}</a>
                                       </h2>
                           <div class="byline">
-                            <span>13 de Nov 2020</span> By <a>Enbajadores del reino</a>
+                          <span>{{date('d-m-Y', strtotime($a->fecha_inicio))}}</span> By <a>{{$a->invita}}</a>
                           </div>
-                          <p class="excerpt">Mujeres que Inspiran</a>
+                        <p class="excerpt">{{$a->lema}}</a>
                           </p>
                         </div>
                       </div>
                     </li>
-                    <li>
-                        <div class="block">
-                          <div class="tags">
-                            <a href="" class="tag">
-                              <span class="">Impacto</span>
-                            </a>
-                          </div>
-                          <div class="block_content">
-                            <h2 class="title">
-                                            <a>Impacto evangelistico</a>
-                                        </h2>
-                            <div class="byline">
-                              <span>15 de Feb 2020</span> By <a>Evangelismo</a>
-                            </div>
-                            <p class="excerpt">Conquistando a Guachene</a>
-                            </p>
-                          </div>
-                        </div>
-                      </li>
+                    @endforeach
 
                   </ul>
                   <a href="#" class="form-control btn btn-info" >Ver mas</a>

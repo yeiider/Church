@@ -12,14 +12,14 @@ class SeederUser extends Seeder
      */
     public function run()
     {
-        User::truncate();
+       // User::truncate();
         User::create([
-         'nombre' => 'Yeider Adrian',
-         'apellido' => 'Mina Caicedo',
+         'nombre' => 'Suley',
+         'apellido' => 'Caicedo Carabali',
          'rol' => 1,
          'logo' => 'logo.png',
-         'email' => 'yeider@iumec.org',
-         'password' => bcrypt('yeider9512'),
+         'email' => 'luz@iumec.org',
+         'password' => bcrypt('iglesia123'),
          'remember_token' => Str::Random(10)
         ]);
     }

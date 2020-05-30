@@ -7,10 +7,13 @@
 
       <div class="clearfix"></div>
 
-
+<?php
+use App\Models\Iglesia;
+$i=Iglesia::Id()->first();
+?>
       <div class="profile clearfix">
         <div class="profile_pic">
-          <img src="{{asset('assets/img/perfiles/'. auth()->user()->logo)}}" alt="" class="img-circle profile_img"/>
+          <img src="{{asset('assets/iglesias/'.str_replace(" ","-",$i->nombre).'/perfiles/'. auth()->user()->logo)}}" alt="" class="img-circle profile_img"/>
         </div>
         <div class="profile_info">
           <span>Biemvenido,</span>
@@ -56,7 +59,7 @@
                 <li><a href={{route('add-miembro')}}>Add Miembro</a></li>
               </ul>
             </li>
-            <li><a><i class="fa fa-cubes"></i> Ingresos <span class="fa fa-chevron-down"></span></a>
+            <li><a><i class="fa fa-line-chart"></i> Ingresos <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                   @if(auth()->user()->rol==1)
                   <li><a href="{{route('tipo_ingreso')}}">Agregar tipo ingreso</a></li>
@@ -72,6 +75,20 @@
 
                 </ul>
               </li>
+              <li><a><i class="fa fa-sort-amount-asc"></i> Eresos <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+                  <li><a href="{{route('egresos')}}">Egresos</a></li>
+                  <li><a href="{{route('egreso-add')}}">Lista de Egreso</a></li>
+                </ul>
+              </li>
+              <li><a><i class="fa fa-users"></i> Recursos Humanos <span class="fa fa-chevron-down"></span></a>
+                <ul class="nav child_menu">
+
+                  <li><a href="{{route('empleados')}}">Empleados</a></li>
+                  <li><a href="{{route('empleado-add')}}">Añadir Empleado</a></li>
+                  <li><a href="{{route('nominas')}}">Nominas</a></li>
+                </ul>
+              </li>
 
             <li><a><i class="fa fa-bar-chart-o"></i> Informes <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
@@ -84,14 +101,14 @@
             </li>
             <li><a><i class="fa fa-clone"></i>Inventario <span class="fa fa-chevron-down"></span></a>
               <ul class="nav child_menu">
-                <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
+              <li><a href="{{route('inventario')}}">Lista de Articulos</a></li>
                 <li><a href="fixed_footer.html">Fixed Footer</a></li>
               </ul>
             </li>
             <li><a><i class="fa fa-calendar"></i>Actividades <span class="fa fa-chevron-down"></span></a>
                 <ul class="nav child_menu">
                 <li><a href="{{route('actividades')}}">Actividades</a></li>
-                  <li><a href="fixed_footer.html">Fixed Footer</a></li>
+                <li><a href="{{route('mis-actividades')}}">Mis Actividades</a></li>
                 </ul>
               </li>
               <li><a><i class="fa fa-inbox"></i>Mensajes <span class="fa fa-chevron-down"></span></a>

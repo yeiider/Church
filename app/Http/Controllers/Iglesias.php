@@ -165,6 +165,7 @@ class Iglesias extends Controller
         $img1 =  date('d-m-y-sh') . $file1->getClientOriginalName();
       }
       $user->logo=$img1;
+      $iglesia->logo=$img1;
 
       if (!empty($request->contra)) {
         if($request->contran!=$request->confirma)
@@ -189,12 +190,12 @@ class Iglesias extends Controller
 
 
       if(!empty($request->portada)){
-        array_map('unlink', glob(public_path().'/assets/img/portadas/' . $config->portada));
-        $file2->move(public_path().'/assets/img/portadas',$img2);
+        array_map('unlink', glob(public_path().'/assets/iglesias/'.str_replace(" ","-",$iglesia->nombre).'/portadas/' . $config->portada));
+        $file2->move(public_path().'/assets/iglesias/'.str_replace(" ","-",$iglesia->nombre).'/portadas',$img2);
       }
       if(!empty($request->perfil)){
-        array_map('unlink', glob(public_path().'/assets/img/perfiles/' . $user->logo));
-        $file1->move(public_path().'/assets/img/perfiles',$img1);
+        array_map('unlink', glob(public_path().'/assets/iglesias/'.str_replace(" ","-",$iglesia->nombre).'/perfiles/' . $user->logo));
+        $file1->move(public_path().'/assets/iglesias/'.str_replace(" ","-",$iglesia->nombre).'/perfiles',$img1);
       }
 
       $user->save();

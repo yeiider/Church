@@ -11,8 +11,6 @@
 |
 */
 
-
-
 Route::get('/','Auth\LoginController@form')->name('login');
 Route::get('/home','Home@index')->name('home');
 Route::get('Logaut','Auth\LoginController@logaut')->name('logaut');
@@ -73,6 +71,24 @@ Route::get('/Cuentas/drop/{id}','Cuentas@drop')->name('drop-cuentas');
 
 Route::get('/Ingresos/Statec/{id}','Ingresos@cambiarEstado')->name('change-statec');
 Route::get('/Egresos','Egresos@index')->name('egresos');
+
+Route::get('/Egreso/Agregar','Egresos@egresosAddView')->name('egreso-add');
+Route::post('/Egreso/create','Egresos@createEgreso')->name('crear-egreso');
+Route::get('/Empleados','Empleados@index')->name('empleados');
+Route::get('/Empleado/crear','Empleados@createView')->name('empleado-add');
+Route::post('/Empleados/set','Empleados@createSet')->name('create-empleado');
+Route::get('/Nominas','Nominas@index')->name('nominas');
+Route::get('/Nominas/Generar/{id}','Nominas@generarNomina')->name('generar-nomina');
+Route::get('Actividad/view/{id}','Actividades@viewActivityPdf')->name('activity');
+
+Route::get('/Nominas/view/{id}','Nominas@nomiaViewPdf')->name('nominaView');
+Route::get('/Actividades/me','Actividades@managerActivity')->name('mis-actividades');
+Route::get('Actividades/Drop/{id}','Actividades@drop')->name('activida-drop');
+Route::post('Activity/set/Update','Actividades@updateActivity')->name('update-activity');
+Route::get('Empleado/{id}','Empleados@empleadoView')->name('empleado-view');
+
+Route::get('/Inventario','Inventarios@index')->name('inventario');
+Route::post('/Inventario/add','Inventarios@create')->name('inventario-crear');
 
 // actividades //
 

@@ -5,9 +5,12 @@
         </div>
         <nav class="nav navbar-nav">
         <ul class=" navbar-right">
+            <?php
+$i=App\Models\Iglesia::Id()->first();
+?>
           <li class="nav-item dropdown open" style={style} >
             <a href="#" class="user-profile dropdown-toggle" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-              <img src="{{asset('assets/img/perfiles/'.auth()->user()->logo)}}" alt="" />{{auth()->user()->nombre . ' ' . auth()->user()->apellido}}
+              <img src="{{asset('assets/iglesias/'.str_replace(" ","-",$i->nombre).'/perfiles/'.auth()->user()->logo)}}" alt="" />{{auth()->user()->nombre . ' ' . auth()->user()->apellido}}
             </a>
             <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
             <a class="dropdown-item"  href="{{route('perfil-user')}}"> Profile</a>

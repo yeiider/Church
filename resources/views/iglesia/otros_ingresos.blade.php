@@ -45,7 +45,7 @@
                     </td>
 
                 <td>${{number_format($i->valor,0,',','.')}}</td>
-                <td>{{date('d-m-Y h:i',strtotime($i->created_at))}}</td>
+                <td>{{date('d-m-Y H:i',strtotime($i->created_at))}}</td>
                 <td> <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false" style="background-color:white">
                     Opcion
@@ -163,13 +163,13 @@
                    <input type="text" name="valor" id="valor" class="form-control">
                </div>
                <div class="form-group row">
-                 <input type="submit" class="btn btn-primary form-control" >
+                 <input type="submit" class="btn btn-primary form-control" value="Registrar">
                </div>
             </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
-          <button type="button" class="btn btn-success" id="edit">Editar</button>
+
         </div>
 
       </div>

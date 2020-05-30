@@ -52976,7 +52976,7 @@ function (_Component) {
         className: "col-lg-5 col-md-5 col-sm-5 "
       }, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("p", {
         className: ""
-      }, "Porsentaje")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("canvas", {
+      }, "Porcentaje")))), react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("tr", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("td", null, react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("canvas", {
         className: "canvasDoughnut",
         height: "140",
         width: "140",

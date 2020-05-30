@@ -77,7 +77,7 @@ export default class InfoMiembrosChart extends Component{
                           <p className="">Categoria</p>
                         </div>
                         <div className="col-lg-5 col-md-5 col-sm-5 ">
-                          <p className="">Porsentaje</p>
+                          <p className="">Porcentaje</p>
                         </div>
                       </th>
                     </tr>

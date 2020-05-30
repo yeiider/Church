@@ -76,9 +76,9 @@
 
                         <select name="publico" id="publico" class="form-control"  tabindex="4" data-placeholder="Seleccione Pais">
                             <option value="1">Publico</option>
-                            <option value="2">Distrito</option>
+                            <!--<option value="2">Distrito</option>-->
                             <option value="3">Privado</option>
-                            <option value="4">Selecciona Personal</option>
+                            <!--<option value="4">Selecciona Personal</option>-->
                         </select>
                       </div>
                       <div class="col-sm-6 col-md-6">
@@ -317,7 +317,7 @@ $(".custom-file-input").on("change", function() {
                           @foreach($data['actividades'] as $k)
                           {
                            title: "{{$k->tipo}}",
-                           descripcion:"{{$k->descripcion}}",
+                           descripcion:"{{json_encode($k->descripcion)}}",
                            lema:"{{$k->lema}}",
                            file:"{{$k->file}}",
                            pastor:"<em>{{$k->iglesia->pastor->nombre .' '. $k->iglesia->pastor->apellido}}</em>",

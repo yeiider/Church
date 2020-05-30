@@ -44,7 +44,11 @@
 
                 <input type="submit" class="btn btn-default submit" value="Entrar" >
 
-                <a class="reset_pass" href="#">Olvido su contraseña?</a>
+                @if (Route::has('password.request'))
+                <a class="btn btn-link" href="{{ route('password.request') }}">
+                    {{ __('Forgot Your Password?') }}
+                </a>
+                @endif
               </div>
 
               <div class="clearfix"></div>

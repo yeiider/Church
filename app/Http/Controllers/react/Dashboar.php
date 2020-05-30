@@ -183,7 +183,7 @@ class Dashboar extends Controller
             $donaciones=Ingreso::whereBetween('created_at',[$inicio,$fin])
             ->where('estado','=',true)
             ->get();
-            $otro=Ingreso2::whereBetween('created_at',[$inicio,$fin])
+            $otros=Ingreso2::whereBetween('created_at',[$inicio,$fin])
             ->where('estado','=',true)
             ->get();
          }else{
@@ -267,17 +267,18 @@ class Dashboar extends Controller
          return $rest;
         }
 
-        if (auth()->user()->roll==1) {
+        if (auth()->user()->rol==1) {
             for ($i=0;$i<=12-1;$i++) {
                 $ss=$mesall[$i];
-                $k=Diezmo:: where('estado','=',true)->$ss()->get();
-                $q=Ofrenda:: where('estado','=',true)->$ss()->get();
-                $v=Ingreso:: where('estado','=',true)->$ss()->get();
-                $o=OtroIngreso:: where('estado','=',true)->$ss()->get();
+                $k=Diezmo::where('estado','=',true)->$ss()->get();
+                $q=Ofrenda::where('estado','=',true)->$ss()->get();
+                $v=Ingreso::where('estado','=',true)->$ss()->get();
+                $o=OtroIngreso::where('estado','=',true)->$ss()->get();
                 $s=0;
-                $vd[$i]+=valor($k,'value');
+                $vd[$i]+=valor($k,'valor');
                 $vo[$i]+=valor($q,'ofrenda');
                 $vi[$i]+=valor($v,'valor');
+                $ot[$i]+=valor($o,'valor');
 
             }
         }else{

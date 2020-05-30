@@ -20,7 +20,7 @@ export default class DashboarBloques extends Component{
     async componentDidMount(){
         try {
             let rest = await fetch(`${url}/dashboard-content`)
-            let data= await rest.json()
+            let data = await rest.json()
             this.setState({
                 totalMiembros:data['miembros'],
                 totalIglesias:data['iglesias'],

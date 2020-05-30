@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 use App\Models\Caja;
 use App\Models\Diezmo;
+use App\Models\Egreso;
 use App\Models\Iglesia;
 use App\Models\Ingreso;
 use App\Models\Ingreso2;
+use App\Models\Nomina;
 use App\Models\Ofrenda;
 use App\Models\OtroIngreso;
 use Illuminate\Http\Request;
@@ -23,6 +25,10 @@ class Cajas extends Controller
 
             $donaciones=Ingreso::whereDay('created_at',date('d'))->get();
             $otros=Ingreso2::whereDay('created_at',date('d'))->get();
+            $nomina=Nomina::whereDay('created_at',date('d'))->get();
+            $otrosegresos=Egreso::whereDay('created_at',date('d'))->get();
+            $caja=Caja::all();
+
         }else{
 
         $iglesia=Iglesia::Id()->first();
@@ -40,6 +46,14 @@ class Cajas extends Controller
         $otros=Ingreso2::where('iglesias_id','=',$iglesia->id)
         ->where('estado','=',true)
         ->whereDay('created_at',date('d'))->get();
+        $nomina=Nomina::where('iglesias_id','=',$iglesia->id)
+
+        ->whereDay('created_at',date('d'))->get();
+        $otrosegresos=Egreso::where('iglesias_id','=',$iglesia->id)
+        ->where('estado','=',true)
+        ->whereDay('created_at',date('d'))->get();
+        $caja=Caja::where('iglesias_id','=',$iglesia->id)->get();
+
 
         }
       function valor($data,$keys){
@@ -50,15 +64,28 @@ class Cajas extends Controller
          return $rest;
       }
 
+      $totalingreso=0;
+      $totalegreso=0;
+      foreach($caja as $ca){
+          $totalingreso+=$ca->ingreso;
+          $totalegreso+=$ca->egreso;
+      }
+      $totalCaja=$totalingreso-$totalegreso;
+
         $data=[
+          'caja' => $totalCaja,
           'diezmos' => valor($diezmos,'valor'),
           'ofrendas' => valor($ofrenda,'ofrenda'),
           'donaciones' => valor($donaciones,'valor'),
+          'nomina' => valor($nomina,'neto'),
           'otros' => valor($otros,'valor'),
+          'egreso' => valor($otrosegresos,'valor'),
           'cd' => $diezmos->count(),
           'co' => $ofrenda->count(),
           'ci' => $donaciones->count(),
-          'cotros' => $otros->count()
+          'cotros' => $otros->count(),
+          'nomina_c' => $nomina->count(),
+          'egreso_c' => $otrosegresos->count()
         ];
 //return date('h:i');
         return view('admin/caja' , compact('data'));
